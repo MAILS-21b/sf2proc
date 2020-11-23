@@ -20,21 +20,26 @@ body *{
     height: 60px;
     background-color: #404040;
     display: inline-flex;
+    -webkit-app-region: drag;
 }
 
-#run {
+#runButton {
+    color: white;
+    background-color: #303030;
+    margin-top: 10px;
+    margin-left: 80px;
     width: 40px;
     height: 40px;
-    margin-top: 10px;
-    margin-left: 40px;
-    padding: 1px;
     border-radius: 50%;
+    -webkit-app-region: no-drag;
 }
-#stop {
+#stopButton {
+    color: white;
+    background-color: #303030;
+    margin-top: 10px;
+    margin-left: 20px;
     width: 40px;
     height: 40px;
-    margin-top: 10px;
-    margin-left: 10px;
-    padding: 1px;
     border-radius: 50%;
+    -webkit-app-region: no-drag;
 }

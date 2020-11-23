@@ -5,15 +5,42 @@ const ipc = electron.ipcMain
 const Menu = electron.Menu
 var child_process = require('child_process');
 
+let win
+
+
 function createWindow () {
-  const win = new BrowserWindow({
-    width: 1200,
-    height: 720,
-    minWidth: 640,
-    minHeight: 480,
-    webPreferences: {
+  if(process.platform == "darwin"){
+    win = new BrowserWindow({
+      width: 1200,
+      height: 720,
+      minWidth: 640,
+      minHeight: 480,
+      titleBarStyle: 'hiddenInset',
+      webPreferences: {
       nodeIntegration: true
     }
+     })
+  }else{
+    win = new BrowserWindow({
+      width: 1200,
+      height: 720,
+      minWidth: 640,
+      minHeight: 480,
+      frame:true,
+      webPreferences: {
+      nodeIntegration: true
+    }
+     })
+  }
+
+  globalShortcut.register('CommandOrControl+q', () => {
+    app.quit();
+  })
+  globalShortcut.register('CommandOrControl+n', () => {
+    console.log("create new file");
+  })
+  globalShortcut.register('CommandOrControl+s', () => {
+    console.log("save project");
   })
 
   win.loadFile('mainWindow.html')
@@ -33,7 +60,19 @@ app.on("ready", function() {
       label: "File",
       submenu:[
         {
-          label: "NewFile"
+          label: "New Project"
+        },
+        {
+          label: "Open Project"
+        },
+        {
+          label: "Save Project"
+        },
+        {
+          label: "Save as.."
+        },
+        {
+          label: "Export Application"
         }
       ]
     },
@@ -41,7 +80,53 @@ app.on("ready", function() {
       label: "Edit",
       submenu:[
         {
+          label: "Undo"
+        },
+        {
+          label: "Redo"
+        },
+        {
+          label: "Cut"
+        },
+        {
           label: "Copy"
+        },
+        {
+          label: "Paste"
+        },
+        {
+          label: "Find"
+        }
+      ]
+    },
+    {
+      label: "Project",
+      submenu:[
+        {
+          label: "Compile"
+        },
+        {
+          label: "Run"
+        },
+        {
+          label: "Compile and Run"
+        },
+        {
+          label: "Stop"
+        }
+      ]
+    },
+    {
+      label: "Help",
+      submenu:[
+        {
+          label: "About"
+        },
+        {
+          label: "Getting Started"
+        },
+        {
+          label: "Github WebPage"
         }
       ]
     }
@@ -52,19 +137,10 @@ app.on("ready", function() {
   Menu.setApplicationMenu(mainMenu);
 
 
-  globalShortcut.register('CommandOrControl+q', () => {
-    app.quit();
-  })
-  globalShortcut.register('CommandOrControl+v', () => {
-    pasteText();
-  })
-  globalShortcut.register('CommandOrControl+n', () => {
-    console.log("create new file");
-  })
-  globalShortcut.register('CommandOrControl+s', () => {
-    console.log("save project");
-  })
   
+  
+
+  //load project directory
 
 })
 
@@ -95,13 +171,12 @@ function runCode()
 //Puma
 function compileCode()
 {
-  
-child_process.execSync("g++ program.cpp -o program.exe && start program.exe");
+  child_process.execSync("g++ -framework sfml-window -framework sfml-graphics -framework sfml-system main.cpp -o program.app");
 }
 
 function runProgram()
 {
-child_process.execSync("start program.exe");
+  child_process.execSync("./program.app &");
 }
 
 function stopProgram()
