@@ -5,8 +5,7 @@ const ipc = electron.ipcMain
 const Menu = electron.Menu
 var child_process = require('child_process');
 
-let win
-
+let win;
 
 function createWindow () {
   if(process.platform == "darwin"){
@@ -17,7 +16,7 @@ function createWindow () {
       minHeight: 480,
       titleBarStyle: 'hiddenInset',
       webPreferences: {
-      nodeIntegration: true
+        nodeIntegration: true
     }
      })
   }else{
@@ -44,7 +43,7 @@ function createWindow () {
   })
 
   win.loadFile('mainWindow.html')
-  win.webContents.openDevTools()
+  //win.webContents.openDevTools()
 }
 
 app.on("ready", function() {
@@ -134,11 +133,7 @@ app.on("ready", function() {
 
   const mainMenu = Menu.buildFromTemplate(template);
 
-  Menu.setApplicationMenu(mainMenu);
-
-
-  
-  
+  Menu.setApplicationMenu(mainMenu);  
 
   //load project directory
 
@@ -146,9 +141,7 @@ app.on("ready", function() {
 
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+  app.quit();
 })
 
 //Getting Button events from index.js and MainWindow.html
@@ -168,12 +161,11 @@ function runCode()
   runProgram();
 }
 
-//Puma
 function compileCode()
 {
   if(process.platform == "darwin"){
     //mac code
-    child_process.execSync("g++ -framework sfml-window -framework sfml-graphics -framework sfml-system main.cpp -o program.app");
+    child_process.execSync("g++ -framework sfml-window -framework sfml-graphics -framework sfml-system *.cpp -o program.app -std=c++17");
   }else{
     //windows code
   }
@@ -184,11 +176,35 @@ function runProgram()
 {
   if(process.platform == "darwin"){
     //mac code
-    child_process.execSync("./program.app &");
+    const program = child_process.spawn("./program.app");
+
+    program.stdout.on('data', (data) => {
+      process.stdout.write(data.toString());
+    });
+
+    program.stderr.on('data', (data) => {
+      console.error(data.toString());
+    });
+
+    program.on('exit', (code) => {
+      console.log(`Child exited with code ${code}`);
+    });
   }else{
     //windows code
+    const program = child_process.spawn("start program.exe");
+
+    program.stdout.on('data', (data) => {
+      process.stdout.write(data.toString());
+    });
+
+    program.stderr.on('data', (data) => {
+      console.error(data.toString());
+    });
+
+    program.on('exit', (code) => {
+      console.log(`Child exited with code ${code}`);
+    });
   }
-  
 }
 
 function stopProgram()

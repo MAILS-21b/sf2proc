@@ -36,15 +36,17 @@
             </div>
             <div class = "mainSection">
                 <div class = "codingSection">
-                    <div id="editor">
-void setup()
-{
+                    <div id="editor">#include "App.hpp"
 
+bool App::setup()
+{
+    createWindow(800,600,"window");
+    return true;
 }
 
-void draw()
+bool App::draw()
 {
-
+    return true;
 }</div>
                     <script>
                         var editor = ace.edit("editor");

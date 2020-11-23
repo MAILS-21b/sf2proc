@@ -16,6 +16,11 @@ $(window).bind("keydown", function (event) {
                 console.log("copy");
                 copySelected();
                 break;
+            case 'x':
+            	event.preventDefault();
+                console.log("copy");
+                cutSelected();
+                break;
         }
     }
 }) 
@@ -28,6 +33,20 @@ async function pasteFile()
 }
 
 function copySelected()
+{
+	const text = editor.getSelectedText();
+	if (!navigator.clipboard) {
+		fallbackCopyTextToClipboard(text);
+		return;
+	}
+	navigator.clipboard.writeText(text).then(function() {
+		console.log('Async: Copying to clipboard was successful!');
+	}, function(err) {
+		console.error('Async: Could not copy text: ', err);
+	});
+}
+
+function cutSelected()
 {
 	const text = editor.getSelectedText();
 	if (!navigator.clipboard) {

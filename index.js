@@ -7,12 +7,14 @@ function onRunButtonClicked()
 	var editor = ace.edit("editor");
 	var text = editor.getValue();
 
+	var filename = "App.cpp"
+
 	const fs = require('fs')
 	function readWriteAsync() {
-	  fs.readFile('main.cpp', 'utf-8', function(err, data){
+	  fs.readFile(filename, 'utf-8', function(err, data){
 	    if (err) throw err;
 
-	    fs.writeFile('main.cpp', text, 'utf-8', function (err) {
+	    fs.writeFile(filename, text, 'utf-8', function (err) {
 	      if (err) throw err;
 	      console.log('filelistAsync complete');
 	    });
@@ -24,7 +26,6 @@ function onRunButtonClicked()
 
 function onStopButtonClicked()
 {
-	console.log("stop");
 	ipc.send("stop-Button-Clicked");
 }
 
