@@ -171,12 +171,24 @@ function runCode()
 //Puma
 function compileCode()
 {
-  child_process.execSync("g++ -framework sfml-window -framework sfml-graphics -framework sfml-system main.cpp -o program.app");
+  if(process.platform == "darwin"){
+    //mac code
+    child_process.execSync("g++ -framework sfml-window -framework sfml-graphics -framework sfml-system main.cpp -o program.app");
+  }else{
+    //windows code
+  }
+  
 }
 
 function runProgram()
 {
-  child_process.execSync("./program.app &");
+  if(process.platform == "darwin"){
+    //mac code
+    child_process.execSync("./program.app &");
+  }else{
+    //windows code
+  }
+  
 }
 
 function stopProgram()
