@@ -8,6 +8,5 @@ bool App::setup()
 
 bool App::draw()
 {
-    log("ez");
     return true;
 }
