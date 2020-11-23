@@ -3,6 +3,7 @@ const electron = require("electron");
 const { app, BrowserWindow, globalShortcut } = electron;
 const ipc = electron.ipcMain
 const Menu = electron.Menu
+var child_process = require('child_process');
 
 function createWindow () {
   const win = new BrowserWindow({
@@ -95,11 +96,12 @@ function runCode()
 function compileCode()
 {
   
+child_process.execSync("g++ program.cpp -o program.exe && start program.exe");
 }
 
 function runProgram()
 {
-
+child_process.execSync("start program.exe");
 }
 
 function stopProgram()
