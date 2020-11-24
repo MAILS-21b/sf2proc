@@ -19,7 +19,9 @@ function createWindow () {
         nodeIntegration: true
     }
      })
-  }else{
+  }
+  else
+  {
     win = new BrowserWindow({
       width: 1200,
       height: 720,
@@ -163,18 +165,26 @@ function runCode()
 
 function compileCode()
 {
-  if(process.platform == "darwin"){
+  if(process.platform == "darwin")
+  {
     //mac code
     child_process.execSync("g++ -framework sfml-window -framework sfml-graphics -framework sfml-system *.cpp -o program.app -std=c++17");
-  }else{
+  }else if(process.platform == "win32")
+  {
     //windows code
+  }
+  else if(process.platform == "linux")
+  {
+    //linux code
+    child_process.execSync("g++ *.cpp -o program -lsfml-graphics -lsfml-window -lsfml-system -std=c++17");
   }
   
 }
 
 function runProgram()
 {
-  if(process.platform == "darwin"){
+  if(process.platform == "darwin")
+  {
     //mac code
     const program = child_process.spawn("./program.app");
 
@@ -189,7 +199,26 @@ function runProgram()
     program.on('exit', (code) => {
       console.log(`Child exited with code ${code}`);
     });
-  }else{
+  }
+  else if(process.platform == "linux")
+  {
+    //mac code
+    const program = child_process.exec("./program");
+
+    program.stdout.on('data', (data) => {
+      process.stdout.write(data.toString());
+    });
+
+    program.stderr.on('data', (data) => {
+      console.error(data.toString());
+    });
+
+    program.on('exit', (code) => {
+      console.log(`Child exited with code ${code}`);
+    });
+  }
+  else
+  {
     //windows code
     const program = child_process.spawn("start program.exe");
 
