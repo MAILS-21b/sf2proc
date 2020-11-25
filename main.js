@@ -37,15 +37,9 @@ function createWindow () {
   globalShortcut.register('CommandOrControl+q', () => {
     app.quit();
   })
-  globalShortcut.register('CommandOrControl+n', () => {
-    console.log("create new file");
-  })
-  globalShortcut.register('CommandOrControl+s', () => {
-    console.log("save project");
-  })
 
   win.loadFile('mainWindow.html')
-  //win.webContents.openDevTools()
+  win.webContents.openDevTools()
 }
 
 app.on("ready", function() {

@@ -2,7 +2,8 @@
 
 int main()
 {
-    cout<<"Hello World";
+    App app;
+    app.start();
     return 0;
 }
 

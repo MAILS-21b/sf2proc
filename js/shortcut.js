@@ -21,6 +21,10 @@ $(window).bind("keydown", function (event) {
                 console.log("copy");
                 cutSelected();
                 break;
+            case 'n':
+                event.preventDefault();
+                createNewFile();
+                break;
         }
     }
 }) 
@@ -58,4 +62,10 @@ function cutSelected()
 	}, function(err) {
 		console.error('Async: Could not copy text: ', err);
 	});
+}
+
+function createNewFile()
+{
+	console.log("create New Tab");
+	createNewTab();
 }

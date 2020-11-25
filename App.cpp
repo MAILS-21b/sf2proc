@@ -8,6 +8,5 @@ bool App::setup()
 
 bool App::draw()
 {
-    log("oh no");
     return true;
 }
