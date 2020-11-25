@@ -55,19 +55,43 @@ app.on("ready", function() {
       label: "File",
       submenu:[
         {
-          label: "New Project"
+          label: "New File",
+          click () { win.webContents.send("newfile"); }
         },
         {
-          label: "Open Project"
+          label: "New Project",
+          click ()
+          {
+            //New Project --- Puma
+            console.log("ez");
+          }
         },
         {
-          label: "Save Project"
+          label: "Open Project",
+          click ()
+          {
+            //Open Project --- Puma
+            console.log("open project");
+          }
+        },
+        {
+          label: "Save Project",
+          click ()
+          {
+            //Open Save --- Puma
+            console.log("save project");
+          }
         },
         {
           label: "Save as.."
         },
         {
-          label: "Export Application"
+          label: "Export Application",
+          click ()
+          {
+            //Export app
+            console.log("export app");
+          }
         }
       ]
     },
@@ -98,13 +122,26 @@ app.on("ready", function() {
       label: "Project",
       submenu:[
         {
-          label: "Compile"
+          label: "Compile",
+          click()
+          {
+            compileCode();
+          }
         },
         {
-          label: "Run"
+          label: "Run",
+          click()
+          {
+            runCode();
+          }
         },
         {
-          label: "Compile and Run"
+          label: "Compile and Run",
+          click()
+          {
+            compileCode();
+            runCode();
+          }
         },
         {
           label: "Stop"
