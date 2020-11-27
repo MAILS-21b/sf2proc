@@ -2,5 +2,10 @@ const path = require("path");
 
 
 ipc.on("newfile",function(){
-	createNewFile()
+	createNewFile();
 }) 
+
+ipc.on("load", function(){
+	console.log("ez");
+	loadTab();
+})

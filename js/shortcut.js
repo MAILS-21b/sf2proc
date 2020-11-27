@@ -69,3 +69,17 @@ function createNewFile()
 	console.log("create New Tab");
 	createNewTab();
 }
+
+function loadTab()
+{
+	var filename = "App.cpp"
+
+	const fs = require('fs')
+	function readWriteAsync() {
+	  fs.readFile(filename, 'utf-8', function(err, data){
+	    if (err) throw err;
+	    editor.setValue(data);
+	  });
+	}	
+	readWriteAsync();
+}

@@ -6,7 +6,6 @@ function onRunButtonClicked()
 {
 	var editor = ace.edit("editor");
 	var text = editor.getValue();
-
 	var filename = "App.cpp"
 
 	const fs = require('fs')

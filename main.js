@@ -40,6 +40,8 @@ function createWindow () {
 
   win.loadFile('mainWindow.html')
   win.webContents.openDevTools()
+
+
 }
 
 app.on("ready", function() {
@@ -72,6 +74,7 @@ app.on("ready", function() {
           {
             //Open Project --- Puma
             console.log("open project");
+            win.webContents.send("load");
           }
         },
         {
@@ -169,6 +172,7 @@ app.on("ready", function() {
   Menu.setApplicationMenu(mainMenu);  
 
   //load project directory
+  
 
 })
 
@@ -233,7 +237,7 @@ function runProgram()
   }
   else if(process.platform == "linux")
   {
-    //mac code
+    //linux
     const program = child_process.exec("./program");
 
     program.stdout.on('data', (data) => {
@@ -251,7 +255,7 @@ function runProgram()
   else
   {
     //windows code
-    const program = child_process.spawn("start program.exe");
+    const program = child_process.exec("start program.exe");
 
     program.stdout.on('data', (data) => {
       process.stdout.write(data.toString());

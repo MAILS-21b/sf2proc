@@ -4,6 +4,21 @@ var untitledTab = 0;
 
 var editorId;
 
+function loadTab()
+{
+	var editor = ace.edit("editor");
+	var filename = "App.cpp"
+
+	const fs = require('fs')
+	function readWriteAsync() {
+	  fs.readFile(filename, 'utf-8', function(err, data){
+	    if (err) throw err;
+	    editor.setValue(data);
+	  });
+	}	
+	readWriteAsync();
+}
+
 function createNewTab()
 {
 	fileTabCount++;
