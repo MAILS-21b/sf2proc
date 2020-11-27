@@ -3,3 +3,5 @@ Program.app
 .DS_Store
 program
 program.exe
+# vscode
+.vscode/ipch
