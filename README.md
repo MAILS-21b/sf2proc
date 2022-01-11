@@ -5,6 +5,8 @@ Easy and minimal coding environment for C++ creative coding
 
 https://github.com/MAILS-21b/sf2proc
 
+![screenshot](https://github.com/MAILS-21b/sf2proc/blob/main/sf2p.png)
+
 Supported Functions
 
 void rect(int x,int y,int w,int h);
@@ -35,8 +37,6 @@ void fill(int color);
 
 
 Try this markdown:
-
-![screenshot](https://github.com/MAILS-21b/sf2proc/blob/main/sf2p.png)
 
 void fill(int r,int g,int b);
 
